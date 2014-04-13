@@ -1,8 +1,8 @@
-﻿using System;
-using Vido.Media.Capture;
-using Vido.Qms;
-namespace Vido.Parking
+﻿namespace Vido.Parking
 {
+  using System;
+  using Vido.Media.Capture;
+  using Vido.Qms;
   public class CenterUnit
   {
     private DailyDirectory imageRoot = null;
@@ -27,12 +27,12 @@ namespace Vido.Parking
     public void RegisterDependencies(IntPtr mainWindowHandle, ICaptureFactory captureFactory)
     {
       imageRoot = new DailyDirectory();
-      recorder  = new EFEntryRecorder();
+      recorder = new EFEntryRecorder();
       idStorage = new EFUniqueIdStorage();
 
-      services  = new ControllerServices() { ImageRoot = imageRoot };
+      services = new ControllerServices() { ImageRoot = imageRoot };
       inputList = new InputDeviceList(mainWindowHandle);
-      reporter  = new GateController(services, inputList, idStorage, recorder);
+      reporter = new GateController(services, inputList, idStorage, recorder);
       captureList = new CaptureList(captureFactory);
     }
 
