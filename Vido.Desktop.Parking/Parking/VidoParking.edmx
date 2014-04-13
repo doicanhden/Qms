@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="VidoParkingModel.Store" Provider="System.Data.SQLite" ProviderManifestToken="ISO8601" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="Card">
+          <Key>
+            <PropertyRef Name="CardId" />
+          </Key>
+          <Property Name="CardId" Type="nvarchar" MaxLength="523227436" Nullable="false" />
+          <Property Name="Data" Type="nvarchar" MaxLength="523227436" />
+          <Property Name="Type" Type="nvarchar" MaxLength="523227436" />
+          <Property Name="State" Type="integer" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="nvarchar" MaxLength="523227436" Nullable="false" />
+          <Property Name="CardId" Type="nvarchar" MaxLength="523227436" />
+          <Property Name="Username" Type="nvarchar" MaxLength="523227436" />
+          <Property Name="Password" Type="nvarchar" MaxLength="523227436" />
+        </EntityType>
+        <EntityType Name="InOutRecord">
+          <Key>
+            <PropertyRef Name="RecordId" />
+          </Key>
+          <Property Name="RecordId" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InEmployeeId" Type="nvarchar" MaxLength="523227436" />
+          <Property Name="InLaneCode" Type="nvarchar" MaxLength="523227436" />
+          <Property Name="InTime" Type="nvarchar" MaxLength="523227436" />
+          <Property Name="InBackImg" Type="nvarchar" MaxLength="523227436" />
+          <Property Name="InFrontImg" Type="nvarchar" MaxLength="523227436" />
+          <Property Name="OutEmployeeId" Type="nvarchar" MaxLength="523227436" />
+          <Property Name="OutLaneCode" Type="nvarchar" MaxLength="523227436" />
+          <Property Name="OutTime" Type="nvarchar" MaxLength="523227436" />
+          <Property Name="OutBackImg" Type="nvarchar" MaxLength="523227436" />
+          <Property Name="OutFrontImg" Type="nvarchar" MaxLength="523227436" />
+          <Property Name="CardId" Type="nvarchar" MaxLength="523227436" />
+          <Property Name="UserData" Type="nvarchar" MaxLength="523227436" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="523227436" />
+          <Property Name="FeeValue" Type="decimal" Precision="53" Scale="0" />
+        </EntityType>
+        <Association Name="FK_Employee_0_0">
+          <End Role="Card" Type="Self.Card" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Card">
+              <PropertyRef Name="CardId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="CardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InOutRecord_0_0">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="InOutRecord" Type="Self.InOutRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="InOutRecord">
+              <PropertyRef Name="OutEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InOutRecord_1_0">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="InOutRecord" Type="Self.InOutRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="InOutRecord">
+              <PropertyRef Name="InEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InOutRecord_2_0">
+          <End Role="Card" Type="Self.Card" Multiplicity="0..1" />
+          <End Role="InOutRecord" Type="Self.InOutRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Card">
+              <PropertyRef Name="CardId" />
+            </Principal>
+            <Dependent Role="InOutRecord">
+              <PropertyRef Name="CardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VidoParkingModelStoreContainer">
+          <EntitySet Name="Card" EntityType="Self.Card" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" store:Type="Tables" />
+          <EntitySet Name="InOutRecord" EntityType="Self.InOutRecord" store:Type="Tables" />
+          <AssociationSet Name="FK_Employee_0_0" Association="Self.FK_Employee_0_0">
+            <End Role="Card" EntitySet="Card" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InOutRecord_0_0" Association="Self.FK_InOutRecord_0_0">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="InOutRecord" EntitySet="InOutRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InOutRecord_1_0" Association="Self.FK_InOutRecord_1_0">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="InOutRecord" EntitySet="InOutRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InOutRecord_2_0" Association="Self.FK_InOutRecord_2_0">
+            <End Role="Card" EntitySet="Card" />
+            <End Role="InOutRecord" EntitySet="InOutRecord" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VidoParkingModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityType Name="Card">
+          <Key>
+            <PropertyRef Name="CardId" />
+          </Key>
+          <Property Name="CardId" Type="String" MaxLength="523227436" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Data" Type="String" MaxLength="523227436" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="523227436" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Int64" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_0_0" FromRole="Card" ToRole="Employee" />
+          <NavigationProperty Name="InOutRecord" Relationship="Self.FK_InOutRecord_2_0" FromRole="Card" ToRole="InOutRecord" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="String" MaxLength="523227436" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CardId" Type="String" MaxLength="523227436" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="523227436" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="523227436" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Card" Relationship="Self.FK_Employee_0_0" FromRole="Employee" ToRole="Card" />
+          <NavigationProperty Name="InOutRecord" Relationship="Self.FK_InOutRecord_0_0" FromRole="Employee" ToRole="InOutRecord" />
+          <NavigationProperty Name="InOutRecord1" Relationship="Self.FK_InOutRecord_1_0" FromRole="Employee" ToRole="InOutRecord" />
+        </EntityType>
+        <EntityType Name="InOutRecord">
+          <Key>
+            <PropertyRef Name="RecordId" />
+          </Key>
+          <Property Name="RecordId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InEmployeeId" Type="String" MaxLength="523227436" FixedLength="false" Unicode="true" />
+          <Property Name="InLaneCode" Type="String" MaxLength="523227436" FixedLength="false" Unicode="true" />
+          <Property Name="InTime" Type="String" MaxLength="523227436" FixedLength="false" Unicode="true" />
+          <Property Name="InBackImg" Type="String" MaxLength="523227436" FixedLength="false" Unicode="true" />
+          <Property Name="InFrontImg" Type="String" MaxLength="523227436" FixedLength="false" Unicode="true" />
+          <Property Name="OutEmployeeId" Type="String" MaxLength="523227436" FixedLength="false" Unicode="true" />
+          <Property Name="OutLaneCode" Type="String" MaxLength="523227436" FixedLength="false" Unicode="true" />
+          <Property Name="OutTime" Type="String" MaxLength="523227436" FixedLength="false" Unicode="true" />
+          <Property Name="OutBackImg" Type="String" MaxLength="523227436" FixedLength="false" Unicode="true" />
+          <Property Name="OutFrontImg" Type="String" MaxLength="523227436" FixedLength="false" Unicode="true" />
+          <Property Name="CardId" Type="String" MaxLength="523227436" FixedLength="false" Unicode="true" />
+          <Property Name="UserData" Type="String" MaxLength="523227436" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="523227436" FixedLength="false" Unicode="true" />
+          <Property Name="FeeValue" Type="Decimal" Precision="53" Scale="0" />
+          <NavigationProperty Name="Card" Relationship="Self.FK_InOutRecord_2_0" FromRole="InOutRecord" ToRole="Card" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_InOutRecord_0_0" FromRole="InOutRecord" ToRole="Employee" />
+          <NavigationProperty Name="Employee1" Relationship="Self.FK_InOutRecord_1_0" FromRole="InOutRecord" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_Employee_0_0">
+          <End Role="Card" Type="Self.Card" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Card">
+              <PropertyRef Name="CardId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="CardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InOutRecord_2_0">
+          <End Role="Card" Type="Self.Card" Multiplicity="0..1" />
+          <End Role="InOutRecord" Type="Self.InOutRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Card">
+              <PropertyRef Name="CardId" />
+            </Principal>
+            <Dependent Role="InOutRecord">
+              <PropertyRef Name="CardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InOutRecord_0_0">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="InOutRecord" Type="Self.InOutRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="InOutRecord">
+              <PropertyRef Name="OutEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InOutRecord_1_0">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="InOutRecord" Type="Self.InOutRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="InOutRecord">
+              <PropertyRef Name="InEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VidoParkingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Card" EntityType="Self.Card" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="InOutRecord" EntityType="Self.InOutRecord" />
+          <AssociationSet Name="FK_Employee_0_0" Association="Self.FK_Employee_0_0">
+            <End Role="Card" EntitySet="Card" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InOutRecord_2_0" Association="Self.FK_InOutRecord_2_0">
+            <End Role="Card" EntitySet="Card" />
+            <End Role="InOutRecord" EntitySet="InOutRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InOutRecord_0_0" Association="Self.FK_InOutRecord_0_0">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="InOutRecord" EntitySet="InOutRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InOutRecord_1_0" Association="Self.FK_InOutRecord_1_0">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="InOutRecord" EntitySet="InOutRecord" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VidoParkingModelStoreContainer" CdmEntityContainer="VidoParkingEntities">
+          <EntitySetMapping Name="Card">
+            <EntityTypeMapping TypeName="VidoParkingModel.Card">
+              <MappingFragment StoreEntitySet="Card">
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="VidoParkingModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InOutRecord">
+            <EntityTypeMapping TypeName="VidoParkingModel.InOutRecord">
+              <MappingFragment StoreEntitySet="InOutRecord">
+                <ScalarProperty Name="RecordId" ColumnName="RecordId" />
+                <ScalarProperty Name="InEmployeeId" ColumnName="InEmployeeId" />
+                <ScalarProperty Name="InLaneCode" ColumnName="InLaneCode" />
+                <ScalarProperty Name="InTime" ColumnName="InTime" />
+                <ScalarProperty Name="InBackImg" ColumnName="InBackImg" />
+                <ScalarProperty Name="InFrontImg" ColumnName="InFrontImg" />
+                <ScalarProperty Name="OutEmployeeId" ColumnName="OutEmployeeId" />
+                <ScalarProperty Name="OutLaneCode" ColumnName="OutLaneCode" />
+                <ScalarProperty Name="OutTime" ColumnName="OutTime" />
+                <ScalarProperty Name="OutBackImg" ColumnName="OutBackImg" />
+                <ScalarProperty Name="OutFrontImg" ColumnName="OutFrontImg" />
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+                <ScalarProperty Name="UserData" ColumnName="UserData" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="FeeValue" ColumnName="FeeValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

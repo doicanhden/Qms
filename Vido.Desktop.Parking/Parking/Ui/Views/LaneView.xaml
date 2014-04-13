@@ -1,0 +1,80 @@
+﻿<UserControl
+  x:Class="Vido.Parking.Ui.Views.LaneView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+  mc:Ignorable="d" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+  <UserControl.Resources>
+    <BitmapImage x:Key="noImage" UriSource="/Vido.Desktop.Parking;component/Parking/Ui/Images/no-image.jpg" />
+  </UserControl.Resources>
+
+  <Grid DataContext="{Binding}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition/>
+      <ColumnDefinition/>
+    </Grid.ColumnDefinitions>
+
+    <!-- Name & Message -->
+    <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" Background="Red">
+      <TextBlock Margin="0,0,5,0" Text="{Binding Name}" FontSize="18"
+                 VerticalAlignment="Center" Foreground="Yellow"/>
+      <TextBlock Margin="5,0,0,0" Text="{Binding Message}" FontSize="15"
+                 VerticalAlignment="Center" Foreground="WhiteSmoke"/>
+    </StackPanel>
+
+    <!-- Camera Image -->
+    <StackPanel Grid.Column="0" Grid.Row="1">
+      <TextBlock Margin="0,5,5,5" Text="Camera phía trước" TextAlignment="Center"/>
+      <Image Margin="0,5,5,5" Source="{Binding CameraImageFront,TargetNullValue={StaticResource noImage}}"/>
+    </StackPanel>
+    <StackPanel Grid.Column="2" Grid.Row="1">
+      <TextBlock Margin="5,5,0,5" Text="Camera phía sau" TextAlignment="Center"/>
+      <Image Margin="5,5,0,5" Source="{Binding TargetNullValue={StaticResource noImage}, Path=CameraImageBack}"/>
+    </StackPanel>
+
+    <!-- Unique Id & User Data-->
+    <Grid Grid.Row="2" Grid.ColumnSpan="2">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+      <StackPanel Grid.Column="0">
+        <TextBlock Margin="0,5,5,5" Text="Thẻ xe" TextAlignment="Center"/>
+        <TextBox Margin="0,5,5,5" Text="{Binding UniqueId, Mode=TwoWay}" IsReadOnly="True"/>
+      </StackPanel>
+
+      <StackPanel Grid.Column="1">
+        <TextBlock Margin="5,5,0,5" Text="Biển số" TextAlignment="Center"/>
+        <TextBox Margin="5,5,0,5" Text="{Binding UserData, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+      </StackPanel>
+    </Grid>
+
+    <!-- Buttons -->
+    <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+      <Button Margin="0,5,5,5" Focusable="False" MinWidth="110" MinHeight="35" Content="Cho phép" Command="{Binding AllowCommand}" Style="{DynamicResource VidoButtonStyle}"/>
+      <Button Margin="5,5,0,5" Focusable="False" MinWidth="110" MinHeight="35" Content="Chặn lại" Command="{Binding BlockCommand}" Style="{DynamicResource VidoButtonStyle}"/>
+    </StackPanel>
+
+    <!-- Saved Image -->
+    <StackPanel Grid.Column="0" Grid.Row="4">
+      <TextBlock Margin="0,5,5,5" Text="Ảnh chụp phía trước" TextAlignment="Center"/>
+      <Image Margin="0,5,5,5" Source="{Binding TargetNullValue={StaticResource noImage}, Path=SavedImageFront}"/>
+    </StackPanel>
+
+    <StackPanel Grid.Column="2" Grid.Row="4">
+      <TextBlock Margin="5,5,0,5" Text="Ảnh chụp phía sau" TextAlignment="Center"/>
+      <Image Margin="5,5,0,5" Source="{Binding TargetNullValue={StaticResource noImage}, Path=SavedImageBack}"/>
+    </StackPanel>
+  </Grid>
+</UserControl>

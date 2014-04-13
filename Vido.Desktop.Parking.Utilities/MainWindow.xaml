@@ -1,0 +1,14 @@
+﻿<Window x:Class="Vido.Parking.Ms.Ui.Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ViewModels ="clr-namespace:Vido.Parking.Ms.Ui.Wpf.ViewModels"
+        x:Name="mainWindows"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="350" Width="525">
+  <Grid>
+    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal">
+      <Button Margin="10" Content="Xem bảng thẻ" Height="25" Command="{Binding ShowCardTableCommand}"/>
+      <Button Margin="10" Content="Xem bảng ghi Vào/Ra" Height="25" Command="{Binding ShowInOutRecordTableCommand}"/>
+    </StackPanel>
+  </Grid>
+</Window>

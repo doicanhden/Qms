@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Settings" targetNamespace="http://tempuri.org/Settings.xsd" xmlns:mstns="http://tempuri.org/Settings.xsd" xmlns="http://tempuri.org/Settings.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Settings" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="Settings" msprop:Generator_UserDSName="Settings">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="LaneConfigs" msprop:Generator_TableClassName="LaneConfigsDataTable" msprop:Generator_TableVarName="tableLaneConfigs" msprop:Generator_TablePropName="LaneConfigs" msprop:Generator_RowDeletingName="LaneConfigsRowDeleting" msprop:Generator_RowChangingName="LaneConfigsRowChanging" msprop:Generator_RowEvHandlerName="LaneConfigsRowChangeEventHandler" msprop:Generator_RowDeletedName="LaneConfigsRowDeleted" msprop:Generator_UserTableName="LaneConfigs" msprop:Generator_RowChangedName="LaneConfigsRowChanged" msprop:Generator_RowEvArgName="LaneConfigsRowChangeEvent" msprop:Generator_RowClassName="LaneConfigsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Code" msprop:Generator_ColumnVarNameInTable="columnCode" msprop:Generator_ColumnPropNameInRow="Code" msprop:Generator_ColumnPropNameInTable="CodeColumn" msprop:Generator_UserColumnName="Code" type="xs:string" minOccurs="0" />
+              <xs:element name="Direction" msprop:Generator_ColumnVarNameInTable="columnDirection" msprop:Generator_ColumnPropNameInRow="Direction" msprop:Generator_ColumnPropNameInTable="DirectionColumn" msprop:Generator_UserColumnName="Direction" type="xs:int" minOccurs="0" />
+              <xs:element name="State" msprop:Generator_ColumnVarNameInTable="columnState" msprop:Generator_ColumnPropNameInRow="State" msprop:Generator_ColumnPropNameInTable="StateColumn" msprop:Generator_UserColumnName="State" type="xs:int" minOccurs="0" />
+              <xs:element name="UIdDeviceName" msprop:Generator_ColumnVarNameInTable="columnUIdDeviceName" msprop:Generator_ColumnPropNameInRow="UIdDeviceName" msprop:Generator_ColumnPropNameInTable="UIdDeviceNameColumn" msprop:Generator_UserColumnName="UIdDeviceName" type="xs:string" minOccurs="0" />
+              <xs:element name="BackCamSource" msprop:Generator_ColumnVarNameInTable="columnBackCamSource" msprop:Generator_ColumnPropNameInRow="BackCamSource" msprop:Generator_ColumnPropNameInTable="BackCamSourceColumn" msprop:Generator_UserColumnName="BackCamSource" type="xs:string" minOccurs="0" />
+              <xs:element name="BackCamCoding" msprop:Generator_ColumnVarNameInTable="columnBackCamCoding" msprop:Generator_ColumnPropNameInRow="BackCamCoding" msprop:Generator_ColumnPropNameInTable="BackCamCodingColumn" msprop:Generator_UserColumnName="BackCamCoding" type="xs:int" minOccurs="0" />
+              <xs:element name="BackCamUsername" msprop:Generator_ColumnVarNameInTable="columnBackCamUsername" msprop:Generator_ColumnPropNameInRow="BackCamUsername" msprop:Generator_ColumnPropNameInTable="BackCamUsernameColumn" msprop:Generator_UserColumnName="BackCamUsername" type="xs:string" minOccurs="0" />
+              <xs:element name="BackCamPassword" msprop:Generator_ColumnVarNameInTable="columnBackCamPassword" msprop:Generator_ColumnPropNameInRow="BackCamPassword" msprop:Generator_ColumnPropNameInTable="BackCamPasswordColumn" msprop:Generator_UserColumnName="BackCamPassword" type="xs:string" minOccurs="0" />
+              <xs:element name="FrontCamSource" msprop:Generator_ColumnVarNameInTable="columnFrontCamSource" msprop:Generator_ColumnPropNameInRow="FrontCamSource" msprop:Generator_ColumnPropNameInTable="FrontCamSourceColumn" msprop:Generator_UserColumnName="FrontCamSource" type="xs:string" minOccurs="0" />
+              <xs:element name="FrontCamCoding" msprop:Generator_ColumnVarNameInTable="columnFrontCamCoding" msprop:Generator_ColumnPropNameInRow="FrontCamCoding" msprop:Generator_ColumnPropNameInTable="FrontCamCodingColumn" msprop:Generator_UserColumnName="FrontCamCoding" type="xs:int" minOccurs="0" />
+              <xs:element name="FrontCamUsername" msprop:Generator_ColumnVarNameInTable="columnFrontCamUsername" msprop:Generator_ColumnPropNameInRow="FrontCamUsername" msprop:Generator_ColumnPropNameInTable="FrontCamUsernameColumn" msprop:Generator_UserColumnName="FrontCamUsername" type="xs:string" minOccurs="0" />
+              <xs:element name="FrontCamPassword" msprop:Generator_ColumnVarNameInTable="columnFrontCamPassword" msprop:Generator_ColumnPropNameInRow="FrontCamPassword" msprop:Generator_ColumnPropNameInTable="FrontCamPasswordColumn" msprop:Generator_UserColumnName="FrontCamPassword" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ParkingConfigs" msprop:Generator_TableClassName="ParkingConfigsDataTable" msprop:Generator_TableVarName="tableParkingConfigs" msprop:Generator_TablePropName="ParkingConfigs" msprop:Generator_RowDeletingName="ParkingConfigsRowDeleting" msprop:Generator_RowChangingName="ParkingConfigsRowChanging" msprop:Generator_RowEvHandlerName="ParkingConfigsRowChangeEventHandler" msprop:Generator_RowDeletedName="ParkingConfigsRowDeleted" msprop:Generator_UserTableName="ParkingConfigs" msprop:Generator_RowChangedName="ParkingConfigsRowChanged" msprop:Generator_RowEvArgName="ParkingConfigsRowChangeEvent" msprop:Generator_RowClassName="ParkingConfigsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Level" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnLevel" msprop:Generator_ColumnPropNameInRow="Level" msprop:Generator_ColumnPropNameInTable="LevelColumn" msprop:Generator_UserColumnName="Level" type="xs:int" minOccurs="0" />
+              <xs:element name="MaximumSlots" msprop:Generator_ColumnVarNameInTable="columnMaximumSlots" msprop:Generator_ColumnPropNameInRow="MaximumSlots" msprop:Generator_ColumnPropNameInTable="MaximumSlotsColumn" msprop:Generator_UserColumnName="MaximumSlots" type="xs:int" minOccurs="0" />
+              <xs:element name="MinimumSlots" msprop:Generator_ColumnVarNameInTable="columnMinimumSlots" msprop:Generator_ColumnPropNameInRow="MinimumSlots" msprop:Generator_ColumnPropNameInTable="MinimumSlotsColumn" msprop:Generator_UserColumnName="MinimumSlots" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ControllerConfigs" msprop:Generator_TableClassName="ControllerConfigsDataTable" msprop:Generator_TableVarName="tableControllerConfigs" msprop:Generator_TablePropName="ControllerConfigs" msprop:Generator_RowDeletingName="ControllerConfigsRowDeleting" msprop:Generator_RowChangingName="ControllerConfigsRowChanging" msprop:Generator_RowEvHandlerName="ControllerConfigsRowChangeEventHandler" msprop:Generator_RowDeletedName="ControllerConfigsRowDeleted" msprop:Generator_UserTableName="ControllerConfigs" msprop:Generator_RowChangedName="ControllerConfigsRowChanged" msprop:Generator_RowEvArgName="ControllerConfigsRowChangeEvent" msprop:Generator_RowClassName="ControllerConfigsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
+              <xs:element name="ImageRootDirectoryName" msprop:Generator_ColumnVarNameInTable="columnImageRootDirectoryName" msprop:Generator_ColumnPropNameInRow="ImageRootDirectoryName" msprop:Generator_ColumnPropNameInTable="ImageRootDirectoryNameColumn" msprop:Generator_UserColumnName="ImageRootDirectoryName" type="xs:string" minOccurs="0" />
+              <xs:element name="DailyDirectoryFormat" msprop:Generator_ColumnVarNameInTable="columnDailyDirectoryFormat" msprop:Generator_ColumnPropNameInRow="DailyDirectoryFormat" msprop:Generator_ColumnPropNameInTable="DailyDirectoryFormatColumn" msprop:Generator_UserColumnName="DailyDirectoryFormat" type="xs:string" minOccurs="0" />
+              <xs:element name="ImageNameFormat" msprop:Generator_ColumnVarNameInTable="columnImageNameFormat" msprop:Generator_ColumnPropNameInRow="ImageNameFormat" msprop:Generator_ColumnPropNameInTable="ImageNameFormatColumn" msprop:Generator_UserColumnName="ImageNameFormat" type="xs:string" minOccurs="0" />
+              <xs:element name="ImportFormat" msprop:Generator_ColumnVarNameInTable="columnImportFormat" msprop:Generator_ColumnPropNameInRow="ImportFormat" msprop:Generator_ColumnPropNameInTable="ImportFormatColumn" msprop:Generator_UserColumnName="ImportFormat" type="xs:string" minOccurs="0" />
+              <xs:element name="ExportFormat" msprop:Generator_ColumnVarNameInTable="columnExportFormat" msprop:Generator_ColumnPropNameInRow="ExportFormat" msprop:Generator_ColumnPropNameInTable="ExportFormatColumn" msprop:Generator_UserColumnName="ExportFormat" type="xs:string" minOccurs="0" />
+              <xs:element name="EntryRequestTimeout" msprop:Generator_ColumnVarNameInTable="columnEntryRequestTimeout" msprop:Generator_ColumnPropNameInRow="EntryRequestTimeout" msprop:Generator_ColumnPropNameInTable="EntryRequestTimeoutColumn" msprop:Generator_UserColumnName="EntryRequestTimeout" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="ControllerConfigsKey1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ControllerConfigs" />
+      <xs:field xpath="mstns:Id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,43 @@
+﻿<Window
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:ViewModels ="clr-namespace:Vido.Parking.Ms.Ui.Wpf.ViewModels"
+  xmlns:Wpf="clr-namespace:Vido.Parking.Ms.Ui.Wpf" x:Class="Vido.Parking.Ms.Ui.Wpf.Views.InOutRecordView"
+  x:Name="mainWindow"
+  WindowStartupLocation="CenterOwner"
+  Title="Bảng ghi Vào/Ra">
+  <Window.DataContext>
+    <ViewModels:InOutRecordViewModel/>
+  </Window.DataContext>
+  <Grid DataContext="{Binding}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+    <DataGrid DataContext="{Binding InOutRecords}" x:Name="inOutRecordDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,10,5" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False">
+      <DataGrid.Columns>
+        <DataGridTextColumn x:Name="recordIdColumn" Header="Số thứ tự" Binding="{Binding RecordId}"/>
+        <DataGridTextColumn x:Name="cardIdColumn" Header="Mã thẻ" Binding="{Binding CardId}"/>
+        <DataGridTextColumn x:Name="userDataColumn" Header="Biển số" Binding="{Binding UserData}"/>
+        <DataGridTextColumn x:Name="commentColumn" Header="Ghi chú" Binding="{Binding Comment}"/>
+        <DataGridTextColumn x:Name="feeValueColumn" Header="Tổng tiền" Binding="{Binding FeeValue}"/>
+        <DataGridTextColumn x:Name="inEmployeeIdColumn" Header="Nhân viên cho vào" Binding="{Binding InEmployeeId}"/>
+        <DataGridTextColumn x:Name="inLaneCodeColumn" Header="Mã làn vào" Binding="{Binding InLaneCode}"/>
+        <DataGridTextColumn x:Name="inTimeColumn" Header="Thời gian vào" Binding="{Binding InTime}"/>
+        <DataGridTextColumn x:Name="inBackImgColumn" Header="Ảnh biển số vào" Binding="{Binding InBackImg}"/>
+        <DataGridTextColumn x:Name="inFrontImgColumn" Header="Ảnh người vào" Binding="{Binding InFrontImg}"/>
+        <DataGridTextColumn x:Name="outEmployeeIdColumn" Header="Nhân viên cho ra" Binding="{Binding OutEmployeeId}"/>
+        <DataGridTextColumn x:Name="outLaneCodeColumn" Header="Mã làn ra" Binding="{Binding OutLaneCode}"/>
+        <DataGridTextColumn x:Name="outTimeColumn" Header="Thời gian ra" Binding="{Binding OutTime}"/>
+        <DataGridTextColumn x:Name="outBackImgColumn" Header="Ảnh biển số ra" Binding="{Binding OutBackImg}"/>
+        <DataGridTextColumn x:Name="outFrontImgColumn" Header="Ảnh người ra" Binding="{Binding OutFrontImg}"/>
+      </DataGrid.Columns>
+    </DataGrid>
+    
+    <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal"> 
+      <Button Margin="10,5,10,10" Width="90" Content="Lưu"
+              Command="{Binding SaveCommand}"
+              CommandParameter="{Binding ElementName=mainWindow}"/>
+    </StackPanel>
+  </Grid>
+</Window>
