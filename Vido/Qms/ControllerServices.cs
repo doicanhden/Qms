@@ -38,16 +38,6 @@ namespace Vido.Qms
     {
       return (new UniqueId(printable ? GetAscii(uniqueId) : Convert.ToBase64String(uniqueId)));
     }
-    private string GetAscii(byte[] bytes)
-    {
-      StringBuilder sb = new StringBuilder();
-      foreach (var b in bytes)
-      {
-        sb.Append(Convert.ToChar(b));
-      }
-
-      return (sb.ToString());
-    }
     public virtual IUserData GetUserData(ImagePair image)
     {
       return (new UserData(string.Empty));
@@ -56,10 +46,15 @@ namespace Vido.Qms
     public virtual bool EntryRequest(
       EventWaitHandle entryBlock,
       EventWaitHandle entryAllow,
-      EventWaitHandle newEntries)
+      EventWaitHandle newEntries,
+      Action<int> timeoutDisplay)
     {
-      bool allow = true;
+      if (timeoutDisplay != null)
+      {
+        timeoutDisplay(EntryRequestTimeout);
+      }
 
+      bool allow = true;
       for (int t = EntryRequestTimeout; t > 0; t -= 1000)
       {
         if (entryBlock.WaitOne(500))
@@ -80,6 +75,17 @@ namespace Vido.Qms
       }
 
       return (allow);
+    }
+
+    public virtual string ToPrintString(Entry entry)
+    {
+      return (string.Format("{0},{1},{2},{3},{4},{5}",
+        entry.EntryTime, entry.EntryGate,
+        entry.UniqueId, entry.UserData, entry.FirstImage, entry.SecondImage));
+    }
+    public virtual Encoding PrintEncoding
+    {
+      get { return (Encoding.UTF8); }
     }
 
     public virtual bool SaveImage(ImagePair image, Entry entry, Direction direction)
@@ -127,5 +133,17 @@ namespace Vido.Qms
 
       return (true);
     }
+
+    private string GetAscii(byte[] bytes)
+    {
+      StringBuilder sb = new StringBuilder();
+      foreach (var b in bytes)
+      {
+        sb.Append(Convert.ToChar(b));
+      }
+
+      return (sb.ToString());
+    }
+
   }
 }

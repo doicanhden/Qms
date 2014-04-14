@@ -25,6 +25,7 @@
       this.entities = new VidoParkingEntities();
       this.MaximumSlots = maximumSlots;
       this.MinimumSlots = minimumSlots;
+      this.CurrentUserId = "TEST";
     }
     #endregion
 
@@ -103,7 +104,6 @@
           var inRecords = from Records in entities.InOutRecord
                           where
                             Records.CardId == uniqueId &&
-                            Records.UserData == userData &&
                             Records.OutEmployeeId == null &&
                             Records.OutLaneCode == null &&
                             Records.OutTime == null &&
@@ -246,14 +246,11 @@
 
             /// Cập nhật dữ liệu vào Database.
             entities.SaveChanges();
-          }
-          else
-          {
-            /// TODO: Địa phương hóa chuỗi thông báo.
-            RaiseNewMessage("IParking.Out: Lỗi CSDL, không có hoặc có nhiều hơn một thông tin phương tiện vào.");
+
+            return (true);
           }
 
-          return (true);
+          return (false);
         }
         catch (Exception ex)
         {

@@ -27,6 +27,7 @@ namespace Vido.Qms
     void SavedImage(IFileStorage fileStorage, string firstPath, string secondPath);
     void ImportDisplay(IImport import);
     void ExportDisplay(IExport export);
+    void TimeoutDisplay(int milisecondsTimeout);
     #endregion
   }
 

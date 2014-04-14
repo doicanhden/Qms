@@ -160,7 +160,7 @@ namespace Vido.Qms
                   /// Chờ sự cho phép để đối tượng vào cổng
                   /// Trong thời gian chờ cho phép,
                   /// người dùng có thể thay đổi thông tin.
-                  bool allow = services.EntryRequest(entryBlock, entryAllow, entries.NewItems);
+                  bool allow = services.EntryRequest(entryBlock, entryAllow, entries.NewItems, gate.TimeoutDisplay);
 
                   /// Chặn sự thay đổi từ người dùng từ thời điểm này.
                   /// Sao chép chuỗi, DotNet ngu ngốc,
@@ -194,6 +194,10 @@ namespace Vido.Qms
                         gate.OnCompleted();
 
                         /// TODO: Add Printer
+                        if (gate.Printer != null)
+                        {
+                          gate.Printer.Print(services.ToPrintString(entry), services.PrintEncoding);
+                        }
                       }
                       else
                       {
@@ -255,7 +259,7 @@ namespace Vido.Qms
                       gate.SavedImage(services.ImageRoot, export.FirstImage, export.SecondImage);
 
                       /// Chờ sự cho phép đối tượng ra của người dùng.
-                      if (services.EntryRequest(entryBlock, entryAllow, entries.NewItems))
+                      if (services.EntryRequest(entryBlock, entryAllow, entries.NewItems, gate.TimeoutDisplay))
                       {
                         /// Ghi lại thông tin đối tượng ra.
                         if (recorder.Export(entry))
@@ -267,6 +271,10 @@ namespace Vido.Qms
                           gate.OnCompleted();
 
                           /// TODO: Add Printer
+                          if (gate.Printer != null)
+                          {
+                            gate.Printer.Print(services.ToPrintString(entry), services.PrintEncoding);
+                          }
                         }
                         else
                         {

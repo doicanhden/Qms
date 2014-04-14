@@ -5,6 +5,7 @@
   using System.Threading;
   using System.Windows.Input;
   using System.Windows.Media.Imaging;
+  using System.Windows.Threading;
   using Vido.Media;
   using Vido.Media.Capture;
   using Vido.Parking.Ui.Commands;
@@ -28,8 +29,35 @@
     private ICommand allowCommand = null;
     private ICapture cameraFirst;
     private ICapture cameraSecond;
+    private string allowButtonText;
+    private string blockButtonText;
+    private DispatcherTimer timer;
+    private int secondsTimeout = 0;
+    private bool allowButtonEnable = false;
+    private bool blockButtonEnable = false;
     #endregion
 
+    #region Public Commnands
+    public ICommand AllowCommand
+    {
+      get
+      {
+        return (allowCommand ?? (allowCommand =
+          new RelayCommand((x) => { Allow.Set(); })));
+      }
+    }
+
+    public ICommand BlockCommand
+    {
+      get
+      {
+        return (blockCommand ?? (blockCommand =
+          new RelayCommand((x) => { Block.Set(); })));
+      }
+    }
+    #endregion
+
+    #region Public Properties (for Binding)
     public string Name
     {
       get { return (name); }
@@ -105,26 +133,46 @@
       }
     }
 
-    #region Public Commnands
-    public ICommand AllowCommand
+    public string AllowButtonText
     {
-      get
+      get { return (allowButtonText); }
+      set
       {
-        return (allowCommand ?? (allowCommand =
-          new RelayCommand((x) => { Allow.Set(); })));
+        allowButtonText = value;
+        RaisePropertyChanged(() => AllowButtonText);
+      }
+    }
+    public bool AllowButtonEnable
+    {
+      get { return (allowButtonEnable); }
+      set
+      {
+        allowButtonEnable = value;
+        RaisePropertyChanged(() => AllowButtonEnable);
       }
     }
 
-    public ICommand BlockCommand
+    public string BlockButtonText
     {
-      get
+      get { return (blockButtonText); }
+      set
       {
-        return (blockCommand ?? (blockCommand =
-          new RelayCommand((x) => { Block.Set(); })));
+        blockButtonText = value;
+        RaisePropertyChanged(() => BlockButtonText);
+      }
+    }
+    public bool BlockButtonEnable
+    {
+      get { return (blockButtonEnable); }
+      set
+      {
+        blockButtonEnable = value;
+        RaisePropertyChanged(() => BlockButtonEnable);
       }
     }
     #endregion
 
+    #region Public Properties
     public GateState State { get; set; }
     public Direction Direction { get; set; }
 
@@ -173,7 +221,25 @@
     public IInputDevice Input { get; set; }
 
     public IPrinter Printer { get; set; }
+    #endregion
 
+
+
+    private void timer_Tick(object sender, EventArgs e)
+    {
+      if (secondsTimeout >= 0)
+      {
+        BlockButtonText = string.Format("{0} - Chặn lại", secondsTimeout);
+        --secondsTimeout;
+      }
+      else
+      {
+        BlockButtonText = "Chặn lại";
+
+        timer.Stop();
+        DisableCommands();
+      }
+    }
     public LaneViewModel(IInputDevice input)
     {
       Requires.NotNull(input, "input");
@@ -186,8 +252,111 @@
       userData = new UserData(string.Empty);
 
       Deregister = CenterUnit.Current.Reporter.Subscribe(this);
+
+      AllowButtonText = "Cho phép";
+      BlockButtonText = "Chặn lại";
+
+      timer = new DispatcherTimer();
+      timer.Interval = new TimeSpan(0, 0, 1);
+      timer.Tick += new EventHandler(timer_Tick);
     }
 
+    #region Public Methods
+    public void OnError(Exception error)
+    {
+      /// Lọc ngoại lệ. (^_^)
+      if (false)//error is SystemErrorException)
+      {
+        //Debug.WriteLine(
+        //  "{Lane}: Có lỗi hệ thống xảy ra.\n{Message}\nVui lòng thông báo với quản trị."
+        //  .NamedFormat(new { Lane = Name, Message = error.Message}));
+      }
+      else
+      {
+        NewMessage(error.Message);
+      }
+
+      timer.Stop();
+      DisableCommands();
+    }
+
+    public void OnNext(EntryArgs value)
+    {
+      uniqueId = value.UniqueId;
+      RaisePropertyChanged(() => UniqueId);
+
+      userData = value.UserData;
+      RaisePropertyChanged(() => UserData);
+
+      var first = value.Images.First as BitmapImageHolder;
+      SavedImageBack = (first == null || !first.Available) ? null : first.Image;
+
+      var second = value.Images.Second as BitmapImageHolder;
+      SavedImageFront = (second == null || !second.Available) ? null : second.Image;
+
+      NewMessage("Đang chờ sự cho phép... ");
+
+      timer.Stop();
+      DisableCommands();
+    }
+
+    public void OnCompleted()
+    {
+      if (Direction == Qms.Direction.Export)
+      {
+        NewMessage("Mời phương tiện RA bãi");
+      }
+      else
+      {
+        NewMessage("Mời phương tiện VÀO bãi");
+      }
+
+      timer.Stop();
+      DisableCommands();
+    }
+    #endregion
+
+    #region Explicit Implementation of IGate
+    void IGate.SavedImage(IFileStorage fileStorage, string first, string second)
+    {
+      SavedImageBack = fileStorage.Exists(first) ?
+        BitmapImageFromStream(fileStorage.Open(first)) : null;
+
+      SavedImageFront = fileStorage.Exists(second) ?
+        BitmapImageFromStream(fileStorage.Open(second)) : null;
+    }
+    void IGate.ImportDisplay(IImport import)
+    {
+    }
+    void IGate.ExportDisplay(IExport export)
+    {
+    }
+    void IGate.TimeoutDisplay(int milisecondsTimeout)
+    {
+      secondsTimeout = milisecondsTimeout / 1000;
+
+      timer.Start();
+      EnableCommands();
+    }
+    #endregion
+
+    #region Private Methods
+    private void EnableCommands()
+    {
+      AllowButtonEnable = true;
+      BlockButtonEnable = true;
+    }
+    private void DisableCommands()
+    {
+      AllowButtonText = "Cho phép";
+      BlockButtonText = "Chặn lại";
+
+      AllowButtonEnable = false;
+      BlockButtonEnable = false;
+
+      Allow.Reset();
+      Block.Reset();
+    }
     private void cameraFirst_NewFrame(object sender, EventArgs e)
     {
       var args = e as NewFrameEventArgs;
@@ -214,65 +383,6 @@
         new { Time = DateTime.Now, Message = message });
     }
 
-    public void OnError(Exception error)
-    {
-      /// Lọc ngoại lệ. (^_^)
-      if (false)//error is SystemErrorException)
-      {
-        //Debug.WriteLine(
-        //  "{Lane}: Có lỗi hệ thống xảy ra.\n{Message}\nVui lòng thông báo với quản trị."
-        //  .NamedFormat(new { Lane = Name, Message = error.Message}));
-      }
-      else
-      {
-        NewMessage(error.Message);
-      }
-    }
-
-    public void OnNext(EntryArgs value)
-    {
-      uniqueId = value.UniqueId;
-      RaisePropertyChanged(() => UniqueId);
-
-      userData = value.UserData;
-      RaisePropertyChanged(() => UserData);
-
-      var first = value.Images.First as BitmapImageHolder;
-      SavedImageBack = (first == null || !first.Available) ? null : first.Image;
-
-      var second = value.Images.Second as BitmapImageHolder;
-      SavedImageFront = (second == null || !second.Available) ? null : second.Image;
-
-      NewMessage("Đang chờ sự cho phép... ");
-    }
-
-    public void OnCompleted()
-    {
-      if (Direction == Qms.Direction.Export)
-      {
-        NewMessage("Mời phương tiện RA bãi");
-      }
-      else
-      {
-        NewMessage("Mời phương tiện VÀO bãi");
-      }
-    }
-
-    void IGate.SavedImage(IFileStorage fileStorage, string first, string second)
-    {
-      SavedImageBack = fileStorage.Exists(first) ?
-        BitmapImageFromStream(fileStorage.Open(first)) : null;
-
-      SavedImageFront = fileStorage.Exists(second) ?
-        BitmapImageFromStream(fileStorage.Open(second)) : null;
-    }
-    void IGate.ImportDisplay(IImport import)
-    {
-    }
-    void IGate.ExportDisplay(IExport export)
-    {
-    }
-
     private static BitmapImage BitmapImageFromStream(Stream stream)
     {
       BitmapImage image = new BitmapImage();
@@ -284,5 +394,8 @@
 
       return (image);
     }
+    #endregion
+
+    
   }
 }

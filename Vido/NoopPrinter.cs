@@ -18,7 +18,7 @@ namespace Vido
       return (PrintResult.Success);
     }
 
-    public PrintResult Print(byte[] data, Encoding encoding)
+    public PrintResult Print(string data, Encoding encoding)
     {
       return (PrintResult.Success);
     }

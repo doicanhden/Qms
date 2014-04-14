@@ -17,7 +17,7 @@ namespace Vido
 
     #region Methods
     PrintResult Print(byte[] data);
-    PrintResult Print(byte[] data, Encoding encoding);
+    PrintResult Print(string data, Encoding encoding);
     #endregion
   }
 }

@@ -51,19 +51,19 @@
 
       <StackPanel Grid.Column="0">
         <TextBlock Margin="0,5,5,5" Text="Thẻ xe" TextAlignment="Center"/>
-        <TextBox Margin="0,5,5,5" Text="{Binding UniqueId, Mode=TwoWay}" IsReadOnly="True"/>
+        <TextBox Margin="0,5,5,5" Height="25" Text="{Binding UniqueId, Mode=TwoWay}" IsReadOnly="True"/>
       </StackPanel>
 
       <StackPanel Grid.Column="1">
         <TextBlock Margin="5,5,0,5" Text="Biển số" TextAlignment="Center"/>
-        <TextBox Margin="5,5,0,5" Text="{Binding UserData, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Margin="5,5,0,5" Height="25" Text="{Binding UserData, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
       </StackPanel>
     </Grid>
 
     <!-- Buttons -->
     <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
-      <Button Margin="0,5,5,5" Focusable="False" MinWidth="110" MinHeight="35" Content="Cho phép" Command="{Binding AllowCommand}" Style="{DynamicResource VidoButtonStyle}"/>
-      <Button Margin="5,5,0,5" Focusable="False" MinWidth="110" MinHeight="35" Content="Chặn lại" Command="{Binding BlockCommand}" Style="{DynamicResource VidoButtonStyle}"/>
+      <Button Margin="0,5,5,5" Focusable="False" MinWidth="150" MinHeight="35" Content="{Binding AllowButtonText}" IsEnabled="{Binding AllowButtonEnable}" Command="{Binding AllowCommand}" Style="{DynamicResource VidoButtonStyle}"/>
+      <Button Margin="5,5,0,5" Focusable="False" MinWidth="150" MinHeight="35" Content="{Binding BlockButtonText}" IsEnabled="{Binding BlockButtonEnable}" Command="{Binding BlockCommand}" Style="{DynamicResource VidoButtonStyle}"/>
     </StackPanel>
 
     <!-- Saved Image -->
