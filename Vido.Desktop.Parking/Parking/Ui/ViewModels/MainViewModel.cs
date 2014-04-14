@@ -21,6 +21,7 @@
     private string status;
     private ICommand showLaneConfigsCommand;
     private ICommand showConnectionStringEditorCommand;
+    private ICommand showSwitchShiftsDialogCommand;
     #endregion
 
     #region Public Properties
@@ -65,17 +66,24 @@
           new RelayCommand(ShowLaneConfigsExecute)));
       }
     }
-    public ICommand ShowConnectionStringEditCommand
+
+    public ICommand ShowConnectionStringEditorCommand
     {
       get
       {
         return (showConnectionStringEditorCommand ?? (showConnectionStringEditorCommand =
           new RelayCommand(ShowConnectionStringEditExecute)));
       }
-
     }
 
-
+    public ICommand ShowSwitchShiftsDialogCommand
+    {
+      get
+      {
+        return (showSwitchShiftsDialogCommand ?? (showSwitchShiftsDialogCommand =
+          new RelayCommand(ShowSwitchShiftsDialogExecute)));
+      }
+    }
     #endregion
 
     #region Public Constructors
@@ -181,7 +189,15 @@
         DataContext = new LaneManagementViewModel(this)
       }.ShowDialog();
     }
-    
+
+    private void ShowSwitchShiftsDialogExecute(object obj)
+    {
+      new Views.SwitchShiftsView()
+      {
+        Owner = mainWindow
+      }.ShowDialog();
+    }
+
     private void TestDatabaseConnection()
     {
       while (!Database.TestConnection())

@@ -89,15 +89,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Settings.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Parking\Ui\Models\SwitchShifts.cs" />
     <Compile Include="Parking\Ui\Settings.cs" />
     <Compile Include="Parking\Ui\Utilities\Database.cs" />
     <Compile Include="Parking\Ui\ViewModels\ConnectionStringEditorViewModel.cs" />
     <Compile Include="Parking\Ui\ViewModels\LaneManagementViewModel.cs" />
+    <Compile Include="Parking\Ui\ViewModels\SwitchShiftsViewModel.cs" />
     <Compile Include="Parking\Ui\Views\ConnectionStringEditorView.xaml.cs">
       <DependentUpon>ConnectionStringEditorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Parking\Ui\Views\LaneManagementView.xaml.cs">
       <DependentUpon>LaneManagementView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parking\Ui\Views\SwitchShiftsView.xaml.cs">
+      <DependentUpon>SwitchShiftsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Qms\DailyDirectory.cs" />
     <Compile Include="Parking\EFUniqueIdStorage.cs" />
@@ -129,6 +134,10 @@
     <Page Include="Parking\Ui\Views\LaneView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Parking\Ui\Views\SwitchShiftsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
