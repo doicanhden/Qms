@@ -82,35 +82,40 @@ namespace Vido.Qms
         {
           var gate = task.Gate;
 
+          if (gate.State == GateState.Closed)
+          {
+            gate.OnError(new GateClosedException());
+            continue;
+          }
+
           /// Chụp ảnh đối tượng truy cập.
           var images = gate.CaptureImage();
 
-          if (images != null)
-          {
-            var entryArgs = new EntryArgs()
-            {
-              /// Cổng có truy cập.
-              Gate = gate,
-
-              /// Lấy định danh duy nhất, mã hóa base64 cho nó để có dạng có thể in.
-              /// Ngoài ra, cũng có thể random Id ở đây, bằng cách override method.
-              UniqueId = services.GetUniqueId(args.Data, args.Printable),
-
-              /// Lấy dữ liệu người dùng, có thể override để xử lý Ocr nhận diện biển số,
-              /// Hoặc nhận diện khuôn mặt rồi trả về tên...
-              UserData = services.GetUserData(images),
-
-              /// Ảnh chụp đối tượng
-              Images = images
-            };
-
-            /// Cho vào hàng đợi của cổng, chờ xử lý. (^_^).
-            task.Entries.Enqueue(entryArgs);
-          }
-          else
+          if (images == null)
           {
             gate.OnError(new CaptureImageFailedException());
+            continue;
           }
+
+          var entryArgs = new EntryArgs()
+          {
+            /// Cổng có truy cập.
+            Gate = gate,
+
+            /// Lấy định danh duy nhất, mã hóa base64 cho nó để có dạng có thể in.
+            /// Ngoài ra, cũng có thể random Id ở đây, bằng cách override method.
+            UniqueId = services.GetUniqueId(args.Data, args.Printable),
+
+            /// Lấy dữ liệu người dùng, có thể override để xử lý Ocr nhận diện biển số,
+            /// Hoặc nhận diện khuôn mặt rồi trả về tên...
+            UserData = services.GetUserData(images),
+
+            /// Ảnh chụp đối tượng
+            Images = images
+          };
+
+          /// Cho vào hàng đợi của cổng, chờ xử lý. (^_^).
+          task.Entries.Enqueue(entryArgs);
         }
       }
     }
@@ -126,6 +131,7 @@ namespace Vido.Qms
       EntryArgs cur = null;
       while (!stopTask.WaitOne(10))
       {
+        /// TODO: Review-Logic
         /// Cổng đang đóng, dừng xử lý.
         /// TODO: Nên thêm phương thức xóa hàng đợi?!
         /// ISSUES: Thêm vào đâu? Xử lý thế nào? @@

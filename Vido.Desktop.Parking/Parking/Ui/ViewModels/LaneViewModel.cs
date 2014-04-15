@@ -35,6 +35,7 @@
     private int secondsTimeout = 0;
     private bool allowButtonEnable = false;
     private bool blockButtonEnable = false;
+    private GateState state;
     #endregion
 
     #region Public Commnands
@@ -173,7 +174,15 @@
     #endregion
 
     #region Public Properties
-    public GateState State { get; set; }
+    public GateState State
+    {
+      get { return (state); }
+      set
+      {
+        state = value;
+        RaisePropertyChanged(() => State);
+      }
+    }
     public Direction Direction { get; set; }
 
     public IDisposable Deregister { get; set; }

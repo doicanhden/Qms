@@ -50,6 +50,7 @@
     <Compile Include="DataInArgs.cs" />
     <Compile Include="Qms\Exceptions\CaptureImageFailedException.cs" />
     <Compile Include="Qms\Exceptions\EntryBlockedException.cs" />
+    <Compile Include="Qms\Exceptions\GateClosedException.cs" />
     <Compile Include="Qms\Exceptions\NotFoundImportImageException.cs" />
     <Compile Include="Qms\Exceptions\RecorderFullException.cs" />
     <Compile Include="Qms\Exceptions\InvalidUniqueIdException.cs" />

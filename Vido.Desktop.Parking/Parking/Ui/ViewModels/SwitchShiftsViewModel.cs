@@ -1,5 +1,6 @@
 ﻿namespace Vido.Parking.Ui.ViewModels
 {
+  using System;
   using System.Windows.Controls;
   using System.Windows.Input;
   using Vido.Parking.Ui.Commands;
@@ -43,7 +44,8 @@
           if (dialog.ShowDialog() != true)
             return;
 
-          dialog.PrintVisual(x, "A WPF printing");
+          dialog.PrintVisual(x, "Switch Shifts Report " +
+            DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
         })));
       }
     }

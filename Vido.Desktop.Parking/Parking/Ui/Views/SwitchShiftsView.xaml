@@ -4,8 +4,9 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:sys="clr-namespace:System;assembly=mscorlib"
   xmlns:vms="clr-namespace:Vido.Parking.Ui.ViewModels"
-  Title="Báo cáo chuyển ca" MinHeight="205" Height="205" MinWidth="492" Width="492"
-  FontSize="20">
+  WindowStartupLocation="CenterOwner"
+  Title="Báo cáo chuyển ca" MinHeight="205"
+  Height="225" MinWidth="492" Width="492" FontSize="20">
   <Window.DataContext>
     <vms:SwitchShiftsViewModel/>
   </Window.DataContext>

@@ -2,7 +2,7 @@
   x:Class="Vido.Parking.Ui.Views.ConnectionStringEditorView"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  Title="Connection String Editor" Height="300" Width="300"
+  Title="Chỉnh sửa chuỗi kết nối" Height="300" Width="300"
   WindowStartupLocation="CenterOwner"
   x:Name="ConnectionStringEditor">
   <Grid>

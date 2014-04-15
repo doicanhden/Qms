@@ -80,6 +80,7 @@
     <Compile Include="Parking\EFEntryRecorder.cs" />
     <Compile Include="Parking\Export.cs" />
     <Compile Include="Parking\Import.cs" />
+    <Compile Include="Parking\Ui\Converter\GateStateToBool.cs" />
     <Compile Include="Parking\Ui\Datasets\Settings.cs">
       <SubType>Component</SubType>
     </Compile>
