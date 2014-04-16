@@ -7,17 +7,9 @@
   {
     public static bool TestConnection()
     {
-      try
-      {
-        VidoParkingEntities entities = new VidoParkingEntities();
+      VidoParkingEntities entities = new VidoParkingEntities();
 
-        return (entities.Database.Exists());
-      }
-      catch (Exception ex)
-      {
-        Debug.WriteLine("TestConnection(): " + ex.Message);
-        return (false);
-      }
+      return (entities.Database.Exists());
     }
   }
 }

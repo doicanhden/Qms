@@ -151,10 +151,10 @@
 
           CameraSecond = CenterUnit.Current.CaptureList.Create(new Configuration()
           {
-            Source = cfg.BackCamSource,
-            Coding = (Coding)cfg.BackCamCoding,
-            Username = cfg.BackCamUsername,
-            Password = cfg.BackCamPassword,
+            Source = cfg.FrontCamSource,
+            Coding = (Coding)cfg.FrontCamCoding,
+            Username = cfg.FrontCamUsername,
+            Password = cfg.FrontCamPassword,
             FrameInterval = 100
           })
         });
@@ -200,18 +200,32 @@
 
     private void TestDatabaseConnection()
     {
-      while (!Database.TestConnection())
+      bool ret;
+      do
       {
-        if (false == new ConnectionStringEditorView()
+        try
         {
-          Owner = mainWindow,
-          DataContext = new ConnectionStringEditorViewModel(false)
-        }.ShowDialog())
-        {
-          Application.Current.Shutdown();
-          break;
+          ret = Database.TestConnection();
         }
-      }
+        catch (Exception ex)
+        {
+          ret = false;
+          MessageBox.Show(ex.Message);
+        }
+
+        if (!ret)
+        {
+          if (false == new ConnectionStringEditorView()
+          {
+            Owner = mainWindow,
+            DataContext = new ConnectionStringEditorViewModel(false)
+          }.ShowDialog())
+          {
+            Application.Current.Shutdown();
+            break;
+          }
+        }
+      } while (!ret);
     }
     #endregion
 
