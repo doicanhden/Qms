@@ -328,11 +328,29 @@
     #region Explicit Implementation of IGate
     void IGate.SavedImage(IFileStorage fileStorage, string first, string second)
     {
-      SavedImageBack = fileStorage.Exists(first) ?
-        BitmapImageFromStream(fileStorage.Open(first)) : null;
+      if (fileStorage.Exists(first))
+      {
+        using (var stream = fileStorage.Open(first))
+        {
+          SavedImageBack = BitmapImageFromStream(stream);
+        }
+      }
+      else
+      {
+        SavedImageBack = null;
+      }
 
-      SavedImageFront = fileStorage.Exists(second) ?
-        BitmapImageFromStream(fileStorage.Open(second)) : null;
+      if (fileStorage.Exists(second))
+      {
+        using (var stream = fileStorage.Open(second))
+        {
+          SavedImageFront = BitmapImageFromStream(stream);
+        }
+      }
+      else
+      {
+        SavedImageFront = null;
+      }
     }
     void IGate.ImportDisplay(IImport import)
     {

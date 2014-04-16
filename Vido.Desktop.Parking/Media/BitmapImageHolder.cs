@@ -59,14 +59,16 @@
 
       var copy = new BitmapImageHolder();
 
-      var stream = new MemoryStream();
-      if (this.Save(stream))
+      using (var stream = new MemoryStream())
       {
-        stream.Seek(0, SeekOrigin.Begin);
-
-        if (copy.Load(stream))
+        if (this.Save(stream))
         {
-          return (copy);
+          stream.Seek(0, SeekOrigin.Begin);
+
+          if (copy.Load(stream))
+          {
+            return (copy);
+          }
         }
       }
 
@@ -75,8 +77,10 @@
 
     public bool Load(IFileStorage storage, string fileName)
     {
-      var stream = storage.Open(fileName);
-      return (Load(stream));
+      using (var stream = storage.Open(fileName))
+      {
+        return (Load(stream));
+      }
     }
 
     public bool Load(Stream stream)
@@ -105,8 +109,10 @@
 
     public bool Save(IFileStorage storage, string fileName)
     {
-      var stream = storage.Open(fileName);
-      return (Save(stream));
+      using (var stream = storage.Open(fileName))
+      {
+        return (Save(stream));
+      }
     }
 
     public bool Save(Stream stream)
