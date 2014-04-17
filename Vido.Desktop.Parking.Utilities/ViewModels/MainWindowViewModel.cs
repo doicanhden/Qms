@@ -1,7 +1,9 @@
 ﻿namespace Vido.Parking.Ms.Ui.Wpf.ViewModels
 {
+  using System;
   using System.Windows;
   using System.Windows.Input;
+  using Vido.Parking.Ms.Ui.Wpf.Views;
 
   public class MainWindowViewModel
   {
@@ -43,6 +45,5 @@
         Owner = View
       }.ShowDialog();
     }
-
   }
 }

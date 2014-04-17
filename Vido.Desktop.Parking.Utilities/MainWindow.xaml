@@ -4,11 +4,13 @@
         xmlns:ViewModels ="clr-namespace:Vido.Parking.Ms.Ui.Wpf.ViewModels"
         x:Name="mainWindows"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Công cụ hỗ trợ" Height="350" Width="525">
   <Grid>
     <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal">
-      <Button Margin="10" Content="Xem bảng thẻ" Height="25" Command="{Binding ShowCardTableCommand}"/>
-      <Button Margin="10" Content="Xem bảng ghi Vào/Ra" Height="25" Command="{Binding ShowInOutRecordTableCommand}"/>
+      <Button Margin="10" Content="Xem bảng thẻ" Height="25" Command="{Binding ShowCardTableCommand}"
+              MinWidth="90" MinHeight="35" FontSize="18" Style="{DynamicResource VidoButtonStyle}"/>
+      <Button Margin="10" Content="Xem bảng ghi Vào/Ra" Height="25" Command="{Binding ShowInOutRecordTableCommand}"
+              MinWidth="90" MinHeight="35" FontSize="18" Style="{DynamicResource VidoButtonStyle}"/>
     </StackPanel>
   </Grid>
 </Window>

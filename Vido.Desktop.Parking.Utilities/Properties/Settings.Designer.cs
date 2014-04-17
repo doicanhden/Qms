@@ -26,7 +26,7 @@ namespace Vido.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("data source=F:\\Github\\Vido\\vidoparking.s3db")]
+        [global::System.Configuration.DefaultSettingValueAttribute("data source=F:\\vidoparking.s3db")]
         public string VidoParkingConnectionString {
             get {
                 return ((string)(this["VidoParkingConnectionString"]));

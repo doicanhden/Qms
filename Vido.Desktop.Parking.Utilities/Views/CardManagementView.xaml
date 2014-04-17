@@ -51,9 +51,10 @@
     </DataGrid>
 
     <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
-      <Button Content="Lưu" Width="90" Margin="10,5,10,10"
+      <Button Content="Lưu" Margin="10,5,10,10"
               Command="{Binding SaveCommand}"
-              CommandParameter="{Binding ElementName=mainCardManagementView}"/>
+              CommandParameter="{Binding ElementName=mainCardManagementView}"
+              Width="90" MinHeight="35" FontSize="18" Style="{DynamicResource VidoButtonStyle}"/>
     </StackPanel>
 
   </Grid>

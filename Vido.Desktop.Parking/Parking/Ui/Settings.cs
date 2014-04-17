@@ -161,15 +161,15 @@
     {
       var newRow1 = laneCfgs.NewRow() as Datasets.Settings.LaneConfigsRow;
 
-      newRow1.Code = "LANE1";
+      newRow1.Code = "VÀO 1";
       newRow1.State = (int)(GateState.Opened);
       newRow1.Direction = (int)(Direction.Import);
       newRow1.UIdDeviceName = @"VID_0E6A&PID_030B";
 
-      newRow1.BackCamSource = "http://camera1.mairie-brest.fr/mjpg/video.mjpg?resolution=320x240";
-      newRow1.BackCamCoding = (int)(Coding.MJpeg);
+      newRow1.BackCamSource = "http://pasteldth.dyndns.org/cgi-bin/net_jpeg.cgi?ch=2";
+      newRow1.BackCamCoding = (int)(Coding.Jpeg);
       newRow1.BackCamUsername = "admin";
-      newRow1.BackCamPassword = "admin";
+      newRow1.BackCamPassword = "123456";
 
       newRow1.FrontCamSource = "http://camera1.mairie-brest.fr/mjpg/video.mjpg?resolution=320x240";
       newRow1.FrontCamCoding = (int)(Coding.MJpeg);
@@ -181,15 +181,15 @@
 
       var newRow2 = laneCfgs.NewRow() as Datasets.Settings.LaneConfigsRow;
 
-      newRow2.Code = "LANE2";
+      newRow2.Code = "RA 1";
       newRow2.State = (int)(GateState.Opened);
       newRow2.Direction = (int)(Direction.Export);
       newRow2.UIdDeviceName = @"PNP0303";
 
-      newRow2.BackCamSource = "http://camera1.mairie-brest.fr/mjpg/video.mjpg?resolution=320x240";
-      newRow2.BackCamCoding = (int)(Coding.MJpeg);
+      newRow2.BackCamSource = "http://pasteldth.dyndns.org/cgi-bin/net_jpeg.cgi?ch=2";
+      newRow2.BackCamCoding = (int)(Coding.Jpeg);
       newRow2.BackCamUsername = "admin";
-      newRow2.BackCamPassword = "admin";
+      newRow2.BackCamPassword = "123456";
 
       newRow2.FrontCamSource = "http://camera1.mairie-brest.fr/mjpg/video.mjpg?resolution=320x240";
       newRow2.FrontCamCoding = (int)(Coding.MJpeg);
